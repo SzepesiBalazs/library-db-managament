@@ -16,5 +16,5 @@ function updateBookAvailability($pdo, $book_id, $availability)
     echo "Book availability updated successfully!";
 }
 
-updateBookAvailability($pdo, 1, false);
+updateBookAvailability($pdo, 1, true);
 
