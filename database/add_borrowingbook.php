@@ -14,7 +14,8 @@ function borrowingBook($pdo, $user_id, $book_id, $borrow_date, $return_date){
     ]);
 
     echo "Borrowed the book succesfully!";
+
+    updateBookAvailability($pdo, 1, false);
 }
 
 borrowingBook($pdo, 1, 1, '2025-05-07', '2025-05-21');
-updateBookAvailability($pdo, $book_id, false);
