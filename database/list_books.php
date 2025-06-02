@@ -2,23 +2,28 @@
 
 require "connection.php";
 
-function listBooks($pdo, $title, $author_name, $category_name, $availability)
+function listBooks($pdo, $title = null, $author_name = null, $category_name = null, $availability = null)
 {
 
-    $availability = (int) $availability;
+    echo $availability;
 
     $sql = "SELECT books.title, authors.name AS author_name, categories.category_name AS category_name, books.availability 
     FROM books
     JOIN authors ON books.author_id = authors.author_id
     JOIN categories ON books.category_id = categories.category_id 
-    WHERE books.title = :title AND authors.name = :author_name AND categories.name = :category_name AND books.availability = :availability";
+    WHERE books.title LIKE :title";
+
+    $params = [
+        ":title" => '%' . $title . '%',
+    ];
+
+    if (isset($author_name)) {
+        $sql .= " AND authors.name LIKE :authors_name";
+        $params[":authors_name"] = '%' . $author_name . '%';
+    }
+
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([
-        ":title" => $title,
-        ":author_name" => $author_name,
-        ":category_name" => $category_name,
-        ":availability" => $availability
-    ]);
+    $stmt->execute($params);
 
     $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -30,3 +35,5 @@ function listBooks($pdo, $title, $author_name, $category_name, $availability)
 
     }
 }
+
+listBooks($pdo, "R", "P");
