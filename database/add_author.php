@@ -13,4 +13,4 @@ function addAuthor($pdo, $name, $dob, $nationality) {
     echo "Author added succesfully!";
 }
 
-addAuthor($pdo, "Ada Palmer", '1990-12-19', 'English');
+addAuthor($pdo, "Bela Bela", '1998-10-09', 'Hungarian');

@@ -25,4 +25,4 @@ function listAuthors($pdo, $name = null, $dob = null, $nationality = null)
     }
 }
 
-listAuthors($pdo, "P" );
+listAuthors($pdo,);

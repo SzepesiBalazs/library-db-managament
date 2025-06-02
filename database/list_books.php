@@ -36,4 +36,4 @@ function listBooks($pdo, $title = null, $author_name = null, $category_name = nu
     }
 }
 
-listBooks($pdo, "R", "P");
+listBooks($pdo, "", "");

@@ -16,4 +16,4 @@ function addBook($pdo, $title, $author_id, $category_id, $published_date, $avail
     echo "Book added succesfully!";
 }
 
-addBook($pdo, "Random Book", 1, 1, "2025-03-15", true);
+addBook($pdo, "Random Book3", 2, 1, "2025-01-15", true);
