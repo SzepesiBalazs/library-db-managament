@@ -1,7 +1,5 @@
 <?php
 
-require "connection.php";
-
 function listAuthors($pdo, $name = null, $dob = null, $nationality = null)
 {
 
@@ -18,11 +16,13 @@ function listAuthors($pdo, $name = null, $dob = null, $nationality = null)
 
     $authors = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($authors as $author) {
-        echo "Name: " . $author['name'] . "<br>";
-        echo "Author: " . $author['dob'] . "<br>";
-        echo "Nationality: " . $author['nationality'] . "<br>";
-    }
-}
+    return json_encode($authors);
 
-listAuthors($pdo,);
+
+
+    //foreach ($authors as $author) {
+    //echo "Name: " . $author['name'] . "<br>";
+    //echo "Author: " . $author['dob'] . "<br>";
+    //echo "Nationality: " . $author['nationality'] . "<br>";
+    //}
+}
