@@ -17,12 +17,4 @@ function listAuthors($pdo, $name = null, $dob = null, $nationality = null)
     $authors = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return json_encode($authors);
-
-
-
-    //foreach ($authors as $author) {
-    //echo "Name: " . $author['name'] . "<br>";
-    //echo "Author: " . $author['dob'] . "<br>";
-    //echo "Nationality: " . $author['nationality'] . "<br>";
-    //}
 }
