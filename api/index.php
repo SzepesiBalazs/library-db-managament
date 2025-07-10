@@ -12,7 +12,7 @@ require_once __DIR__ . '/../database/delete_author.php';
 require_once __DIR__ . '/../database/list_books.php';
 require_once __DIR__ . '/../database/add_book.php';
 require_once __DIR__ . '/../database/list_categories.php';
-
+require_once __DIR__ . '/../database/add_category.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
@@ -68,6 +68,12 @@ if (count($path) >= 2 && $path[0] === 'api') {
             echo addBook($pdo, $data);
             break;
 
+
+        case 'category':
+            $raw = file_get_contents("php://input");
+            $data = json_decode($raw, true);
+            echo addCategory($pdo, $data);
+            break;
 
         default:
             http_response_code(404);
