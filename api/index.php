@@ -11,6 +11,7 @@ require_once __DIR__ . '/../database/update_author.php';
 require_once __DIR__ . '/../database/delete_author.php';
 require_once __DIR__ . '/../database/list_books.php';
 require_once __DIR__ . '/../database/add_book.php';
+require_once __DIR__ . '/../database/list_categories.php';
 
 
 header("Access-Control-Allow-Origin: *");
@@ -33,6 +34,12 @@ if (count($path) >= 2 && $path[0] === 'api') {
             $availability = $_GET['availability'] ?? '';
             echo listBooks($pdo, $title, $author_name, $category_name, $availability);
             break;
+
+        case 'categories':
+            $category_name = $_GET['category_name'] ?? '';
+            echo listCategories($pdo, $category_name);
+            break;
+
 
         case 'author':
             $raw = file_get_contents("php://input");
