@@ -10,6 +10,7 @@ require_once __DIR__ . '/../database/add_author.php';
 require_once __DIR__ . '/../database/update_author.php';
 require_once __DIR__ . '/../database/delete_author.php';
 require_once __DIR__ . '/../database/list_books.php';
+require_once __DIR__ . '/../database/add_book.php';
 
 
 header("Access-Control-Allow-Origin: *");
@@ -20,7 +21,7 @@ $path = explode('/', $request);
 
 if (count($path) >= 2 && $path[0] === 'api') {
     switch ($path[1]) {
-        case 'authors': 
+        case 'authors':
             $name = $_GET['name'] ?? '';
             echo listAuthors($pdo, $name);
             break;
@@ -33,7 +34,7 @@ if (count($path) >= 2 && $path[0] === 'api') {
             echo listBooks($pdo, $title, $author_name, $category_name, $availability);
             break;
 
-        case 'author': 
+        case 'author':
             $raw = file_get_contents("php://input");
             $data = json_decode($raw, true);
 
@@ -53,6 +54,13 @@ if (count($path) >= 2 && $path[0] === 'api') {
                 echo json_encode(['error' => 'Invalid method or missing author ID']);
             }
             break;
+
+        case 'book':
+            $raw = file_get_contents("php://input");
+            $data = json_decode($raw, true);
+            echo addBook($pdo, $data);
+            break;
+
 
         default:
             http_response_code(404);

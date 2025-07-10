@@ -1,19 +1,15 @@
 <?php
 
-require 'connection.php';
-
-function addBook($pdo, $title, $author_id, $category_id, $published_date, $availability)
+function addBook($pdo, $data)
 {
     $sql = "INSERT INTO books (title, author_id, category_id, published_date, availability) VALUES (:title, :author_id, :category_id, :published_date, :availability)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-        ":title" => $title,
-        ":author_id" => $author_id,
-        ":category_id" => $category_id,
-        ":published_date" => $published_date,
-        ":availability" => $availability
+        ":title" => $data['title'],
+        ":author_id" => $data['author_id'],
+        ":category_id" => $data['category_id'],
+        ":published_date" => $data['published_date'],
+        ":availability" => $data['availability']
     ]);
     echo "Book added succesfully!";
 }
-
-addBook($pdo, "Random Book3", 2, 1, "2025-01-15", true);
