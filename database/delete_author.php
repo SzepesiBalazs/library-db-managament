@@ -1,15 +1,12 @@
 <?php
 
-require "connection.php";
-
-function deleteAuthors($pdo, $name){
-    $sql = "DELETE FROM authors WHERE author.name LIKE :name";
+function deleteAuthor($pdo, $id){
+   
+    $sql = "DELETE FROM authors WHERE author_id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-        ":name" => $name,
+        ":id" => $id,
     ]);
 
     echo "Deleted author from the database!";
 }
-
-deleteAuthors($pdo, "Bela Bela");

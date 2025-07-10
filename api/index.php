@@ -7,7 +7,8 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/../database/connection.php';
 require_once __DIR__ . '/../database/list_authors.php';
 require_once __DIR__ . '/../database/add_author.php';
-require_once __DIR__ . '/../database/update_author.php'; // 👈 Add this line
+require_once __DIR__ . '/../database/update_author.php';
+require_once __DIR__ . '/../database/delete_author.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
@@ -28,9 +29,15 @@ if (count($path) >= 2 && $path[0] === 'api') {
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo addAuthor($pdo, $data);
+            
             } elseif ($_SERVER['REQUEST_METHOD'] === 'PATCH' && isset($path[2])) {
                 $authorId = intval($path[2]);
-                updateAuthor($pdo, $authorId, $data); // echoes result directly
+                updateAuthor($pdo, $authorId, $data);
+
+            } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE' && isset($path[2])) {
+                $authorId = intval($path[2]);
+                deleteAuthor($pdo, $authorId);
+            
             } else {
                 http_response_code(400);
                 echo json_encode(['error' => 'Invalid method or missing author ID']);
