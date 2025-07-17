@@ -13,4 +13,3 @@ function addAuthor($pdo, $data)
     echo "Author added succesfully!";
 }
 
-//addAuthor($pdo, "Bela Bela", '1998-10-09', 'Hungarian');
